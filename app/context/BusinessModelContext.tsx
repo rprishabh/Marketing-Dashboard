@@ -7,12 +7,15 @@ export type BusinessModel = "B2B" | "B2C" | "D2C";
 interface BusinessModelContextType {
   businessModel: BusinessModel;
   setBusinessModel: (model: BusinessModel) => void;
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
 }
 
 const BusinessModelContext = createContext<BusinessModelContextType | undefined>(undefined);
 
 export function BusinessModelProvider({ children }: { children: React.ReactNode }) {
   const [businessModel, setBusinessModelState] = useState<BusinessModel>("B2B");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Load from localStorage if available
   useEffect(() => {
@@ -28,7 +31,7 @@ export function BusinessModelProvider({ children }: { children: React.ReactNode 
   };
 
   return (
-    <BusinessModelContext.Provider value={{ businessModel, setBusinessModel }}>
+    <BusinessModelContext.Provider value={{ businessModel, setBusinessModel, sidebarOpen, setSidebarOpen }}>
       {children}
     </BusinessModelContext.Provider>
   );

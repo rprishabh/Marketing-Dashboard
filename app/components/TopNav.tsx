@@ -2,9 +2,10 @@
 
 import React from "react";
 import { useBusinessModel, type BusinessModel } from "../context/BusinessModelContext";
+import { Menu } from "lucide-react";
 
 export default function TopNav() {
-  const { businessModel, setBusinessModel } = useBusinessModel();
+  const { businessModel, setBusinessModel, setSidebarOpen } = useBusinessModel();
 
   const models: BusinessModel[] = ["B2B", "B2C", "D2C"];
 
@@ -28,12 +29,19 @@ export default function TopNav() {
   };
 
   return (
-    <header className="sticky top-0 z-20 backdrop-blur-lg bg-slate-950/80 border-b border-fuchsia-500/20 px-8 py-4 flex items-center justify-between">
-      {/* Left section: Terminal prompt style */}
+    <header className="sticky top-0 z-20 backdrop-blur-lg bg-slate-950/80 border-b border-fuchsia-500/20 px-4 md:px-8 py-4 flex items-center justify-between">
+      {/* Left section: Hamburger (mobile) + Terminal prompt style */}
       <div className="flex items-center gap-3 text-xs font-mono">
-        <span className="text-pink-500 font-bold">$</span>
-        <span className="text-slate-400 font-bold uppercase tracking-wider">mkt-ops</span>
-        <span className="text-fuchsia-500/30">//</span>
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden p-2 -ml-1 rounded-lg border border-pink-500/20 bg-slate-900/60 hover:bg-pink-500/10 text-pink-400 transition-colors"
+          title="Open Navigation Menu"
+        >
+          <Menu className="w-4 h-4" />
+        </button>
+        <span className="text-pink-500 font-bold hidden sm:inline">$</span>
+        <span className="text-slate-400 font-bold uppercase tracking-wider hidden sm:inline">mkt-ops</span>
+        <span className="text-fuchsia-500/30 hidden sm:inline">//</span>
         <span className={`bg-gradient-to-r ${titleColor[businessModel]} bg-clip-text text-transparent font-extrabold text-sm tracking-wide`}>
           SYS_MODEL: {businessModel}
         </span>

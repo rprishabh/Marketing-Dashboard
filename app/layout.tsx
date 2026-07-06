@@ -34,7 +34,7 @@ export default function RootLayout({
           <main className="flex-1 min-h-screen overflow-y-auto grid-bg">
             <TopNav />
             {/* Page content */}
-            <div className="p-8">{children}</div>
+            <div className="p-4 sm:p-8">{children}</div>
           </main>
         </BusinessModelProvider>
       </body>
