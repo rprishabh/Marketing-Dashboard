@@ -9,7 +9,6 @@ export default function TopNav() {
 
   const models: BusinessModel[] = ["B2B", "B2C", "D2C"];
 
-  // Custom styling colors for active selection depending on the business model
   const activeColorMap = {
     B2B: "bg-violet-500/20 border-violet-500 text-violet-300 shadow-[0_0_12px_rgba(139,92,246,0.4)]",
     B2C: "bg-pink-500/20 border-pink-500 text-pink-300 shadow-[0_0_12px_rgba(236,72,153,0.4)]",
@@ -29,41 +28,41 @@ export default function TopNav() {
   };
 
   return (
-    <header className="sticky top-0 z-20 backdrop-blur-lg bg-slate-950/80 border-b border-fuchsia-500/20 px-4 md:px-8 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-20 backdrop-blur-lg bg-slate-950/80 border-b border-fuchsia-500/20 px-4 md:px-8 py-3 md:py-4 flex flex-col sm:flex-row gap-3 sm:gap-6 sm:items-center justify-between">
       {/* Left section: Hamburger (mobile) + Terminal prompt style */}
-      <div className="flex items-center gap-3 text-xs font-mono">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="lg:hidden p-2 -ml-1 rounded-lg border border-pink-500/20 bg-slate-900/60 hover:bg-pink-500/10 text-pink-400 transition-colors"
-          title="Open Navigation Menu"
-        >
-          <Menu className="w-4 h-4" />
-        </button>
-        <span className="text-pink-500 font-bold hidden sm:inline">$</span>
-        <span className="text-slate-400 font-bold uppercase tracking-wider hidden sm:inline">mkt-ops</span>
-        <span className="text-fuchsia-500/30 hidden sm:inline">//</span>
-        <span className={`bg-gradient-to-r ${titleColor[businessModel]} bg-clip-text text-transparent font-extrabold text-sm tracking-wide`}>
-          SYS_MODEL: {businessModel}
-        </span>
-        <span className="text-slate-700 hidden sm:inline">—</span>
-        <span className="text-slate-300 font-bold hidden sm:inline">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "short",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </span>
-        <span className="animate-blink text-pink-500">▋</span>
+      <div className="flex items-center justify-between w-full sm:w-auto gap-3 text-xs font-mono">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="lg:hidden p-2 -ml-1 rounded-lg border border-pink-500/20 bg-slate-900/60 hover:bg-pink-500/10 text-pink-400 transition-colors"
+            title="Open Navigation Menu"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+          <span className="text-pink-500 font-bold hidden md:inline">$</span>
+          <span className="text-slate-400 font-bold uppercase tracking-wider hidden md:inline">mkt-ops</span>
+          <span className="text-fuchsia-500/30 hidden md:inline">//</span>
+          <span className={`bg-gradient-to-r ${titleColor[businessModel]} bg-clip-text text-transparent font-extrabold text-sm tracking-wide`}>
+            SYS_MODEL: {businessModel}
+          </span>
+        </div>
+
+        {/* Right status (only shown on mobile in Row 1) */}
+        <div className="flex sm:hidden items-center gap-2">
+          <span className="text-[10px] text-pink-400/80 font-bold tracking-wider uppercase">
+            CONN
+          </span>
+          <div className="w-2 h-2 bg-pink-500 rounded-full status-dot-pulse" />
+        </div>
       </div>
 
       {/* Middle/Right: Playful, colorful Segment Select */}
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+        <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-end">
           <span className="text-[10px] text-fuchsia-400/80 font-extrabold uppercase tracking-[0.2em] font-mono hidden md:inline">
             SELECT SEGMENT CLASS:
           </span>
-          <div className="flex items-center p-1 rounded-xl border border-fuchsia-500/30 bg-slate-900/90 relative shadow-[0_0_20px_rgba(236,72,153,0.1)]">
+          <div className="flex items-center p-1 rounded-xl border border-fuchsia-500/30 bg-slate-900/90 relative shadow-[0_0_20px_rgba(236,72,153,0.1)] w-full sm:w-auto justify-around">
             {/* Corner Bracket Accents */}
             <span className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-pink-400 pointer-events-none" />
             <span className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-pink-400 pointer-events-none" />
@@ -77,7 +76,7 @@ export default function TopNav() {
                   key={model}
                   onClick={() => setBusinessModel(model)}
                   className={`
-                    relative px-4 py-2 rounded-lg text-xs font-mono font-bold tracking-[0.2em] transition-all duration-300
+                    relative px-3 sm:px-4 py-1.5 rounded-lg text-xs font-mono font-bold tracking-[0.2em] transition-all duration-300
                     ${
                       isActive
                         ? `${activeColorMap[model]} border border-transparent`
@@ -95,13 +94,13 @@ export default function TopNav() {
           </div>
         </div>
 
-        {/* Right status */}
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] text-cyan-400/80 font-bold uppercase tracking-wider font-mono hidden sm:inline">
+        {/* Right status only on desktop/tablet */}
+        <div className="hidden sm:flex items-center gap-3">
+          <span className="text-[10px] text-cyan-400/80 font-bold uppercase tracking-wider font-mono hidden md:inline">
             LOAD: NOMINAL
           </span>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-pink-400/80 font-bold tracking-wider uppercase">
+            <span className="text-[10px] text-pink-400/80 font-bold tracking-wider uppercase hidden md:inline">
               ACTIVE_CONN
             </span>
             <div className="w-2.5 h-2.5 bg-pink-500 rounded-full status-dot-pulse" />
