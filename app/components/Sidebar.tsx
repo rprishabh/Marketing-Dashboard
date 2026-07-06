@@ -62,9 +62,9 @@ export default function Sidebar() {
 
       <aside
         className={`
-          fixed inset-y-0 left-0 h-screen w-72 flex-shrink-0 border-r border-fuchsia-500/20 bg-slate-950 flex flex-col overflow-hidden z-40
+          fixed inset-y-0 left-0 h-screen w-72 flex-shrink-0 border-r border-fuchsia-500/20 bg-slate-950 flex-col overflow-hidden z-40
           transition-transform duration-300 ease-in-out lg:sticky lg:translate-x-0
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+          ${sidebarOpen ? "flex translate-x-0" : "hidden lg:flex -translate-x-full lg:translate-x-0"}
         `}
       >
         {/* ── Header ──────────────────────────────── */}
